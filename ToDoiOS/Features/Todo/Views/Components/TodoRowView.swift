@@ -42,7 +42,7 @@ struct PriorityBadge: View {
     let priority: TodoItem.Priority
 
     var body: some View {
-        Text(priority.rawValue)
+        Text(priority.localizedName)
             .font(.caption2.bold())
             .padding(.horizontal, 8)
             .padding(.vertical, 4)

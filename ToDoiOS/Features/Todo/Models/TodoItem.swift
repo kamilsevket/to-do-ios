@@ -58,3 +58,13 @@ class TodoItem {
         pointsAwarded = priority.points
     }
 }
+
+extension TodoItem.Priority {
+    var localizedName: String {
+        switch self {
+        case .low: return String(localized: "priority.low")
+        case .medium: return String(localized: "priority.medium")
+        case .high: return String(localized: "priority.high")
+        }
+    }
+}

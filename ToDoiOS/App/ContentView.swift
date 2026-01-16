@@ -5,17 +5,17 @@ struct ContentView: View {
         TabView {
             TodoListView()
                 .tabItem {
-                    Label("Tasks", systemImage: "checklist")
+                    Label(String(localized: "tab.tasks"), systemImage: "checklist")
                 }
 
             AchievementsView()
                 .tabItem {
-                    Label("Rewards", systemImage: "trophy.fill")
+                    Label(String(localized: "tab.rewards"), systemImage: "trophy.fill")
                 }
 
             ProfileView()
                 .tabItem {
-                    Label("Profile", systemImage: "person.fill")
+                    Label(String(localized: "tab.profile"), systemImage: "person.fill")
                 }
         }
     }

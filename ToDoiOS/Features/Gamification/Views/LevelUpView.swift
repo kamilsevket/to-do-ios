@@ -18,15 +18,15 @@ struct LevelUpView: View {
                     .scaleEffect(animate ? 1.2 : 1)
                     .animation(.easeInOut(duration: 0.5).repeatForever(), value: animate)
 
-                Text("LEVEL UP!")
+                Text(String(localized: "levelup.title"))
                     .font(.largeTitle.bold())
                     .foregroundColor(.white)
 
-                Text("Level \(level)")
+                Text("\(String(localized: "stats.level")) \(level)")
                     .font(.title)
                     .foregroundColor(.yellow)
 
-                Button("Continue") {
+                Button(String(localized: "levelup.continue")) {
                     onDismiss()
                 }
                 .buttonStyle(.borderedProminent)

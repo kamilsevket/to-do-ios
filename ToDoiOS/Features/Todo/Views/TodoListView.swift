@@ -16,7 +16,7 @@ struct TodoListView: View {
                     todoListContent
                 }
             }
-            .navigationTitle("My Tasks")
+            .navigationTitle(String(localized: "tasks.title"))
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(
@@ -39,9 +39,9 @@ struct TodoListView: View {
             Image(systemName: "checklist")
                 .font(.system(size: 64))
                 .foregroundColor(.secondary)
-            Text("No tasks yet")
+            Text(String(localized: "tasks.empty.title"))
                 .font(.title2.bold())
-            Text("Tap + to add your first task")
+            Text(String(localized: "tasks.empty.subtitle"))
                 .foregroundColor(.secondary)
         }
     }
