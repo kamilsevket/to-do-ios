@@ -3,24 +3,18 @@ import XCTest
 
 final class ProfileViewModelTests: XCTestCase {
 
-    var viewModel: ProfileViewModel!
-
-    override func setUp() {
-        super.setUp()
-        viewModel = ProfileViewModel()
-    }
-
-    override func tearDown() {
-        viewModel = nil
-        super.tearDown()
+    private func makeViewModel() -> ProfileViewModel {
+        ProfileViewModel()
     }
 
     func testCompletionRateEmpty() {
+        let viewModel = makeViewModel()
         let rate = viewModel.getCompletionRate(todos: [])
         XCTAssertEqual(rate, 0)
     }
 
     func testCompletionRateHalf() {
+        let viewModel = makeViewModel()
         let todo1 = TodoItem(title: "Task 1")
         todo1.complete()
         let todo2 = TodoItem(title: "Task 2")
@@ -30,6 +24,7 @@ final class ProfileViewModelTests: XCTestCase {
     }
 
     func testCompletionRateFull() {
+        let viewModel = makeViewModel()
         let todo1 = TodoItem(title: "Task 1")
         todo1.complete()
         let todo2 = TodoItem(title: "Task 2")
@@ -40,6 +35,7 @@ final class ProfileViewModelTests: XCTestCase {
     }
 
     func testCompletionRateNone() {
+        let viewModel = makeViewModel()
         let todo1 = TodoItem(title: "Task 1")
         let todo2 = TodoItem(title: "Task 2")
 
@@ -48,6 +44,7 @@ final class ProfileViewModelTests: XCTestCase {
     }
 
     func testCompletionRateSingleCompleted() {
+        let viewModel = makeViewModel()
         let todo = TodoItem(title: "Single Task")
         todo.complete()
 
@@ -56,6 +53,7 @@ final class ProfileViewModelTests: XCTestCase {
     }
 
     func testCompletionRateSingleNotCompleted() {
+        let viewModel = makeViewModel()
         let todo = TodoItem(title: "Single Task")
 
         let rate = viewModel.getCompletionRate(todos: [todo])
@@ -63,6 +61,7 @@ final class ProfileViewModelTests: XCTestCase {
     }
 
     func testCompletionRateMultipleTasks() {
+        let viewModel = makeViewModel()
         let todos = (1...10).map { TodoItem(title: "Task \($0)") }
 
         todos[0].complete()
@@ -74,6 +73,7 @@ final class ProfileViewModelTests: XCTestCase {
     }
 
     func testCompletionRateQuarter() {
+        let viewModel = makeViewModel()
         let todos = (1...4).map { TodoItem(title: "Task \($0)") }
         todos[0].complete()
 
@@ -82,6 +82,7 @@ final class ProfileViewModelTests: XCTestCase {
     }
 
     func testCompletionRateThreeQuarters() {
+        let viewModel = makeViewModel()
         let todos = (1...4).map { TodoItem(title: "Task \($0)") }
         todos[0].complete()
         todos[1].complete()

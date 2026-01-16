@@ -137,7 +137,11 @@ final class UserProfileTests: XCTestCase {
         let afterCompletion = Date()
 
         XCTAssertNotNil(profile.lastCompletionDate)
-        XCTAssertGreaterThanOrEqual(profile.lastCompletionDate!, beforeCompletion)
-        XCTAssertLessThanOrEqual(profile.lastCompletionDate!, afterCompletion)
+        guard let lastCompletionDate = profile.lastCompletionDate else {
+            XCTFail("lastCompletionDate should not be nil")
+            return
+        }
+        XCTAssertGreaterThanOrEqual(lastCompletionDate, beforeCompletion)
+        XCTAssertLessThanOrEqual(lastCompletionDate, afterCompletion)
     }
 }
