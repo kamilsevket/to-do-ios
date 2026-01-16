@@ -3,6 +3,8 @@ import SwiftData
 
 @main
 struct ToDoiOSApp: App {
+    @State private var gamificationViewModel = GamificationViewModel()
+
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             TodoItem.self,
@@ -21,7 +23,24 @@ struct ToDoiOSApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear {
+                    initializeData()
+                }
+                .overlay {
+                    if gamificationViewModel.showLevelUpCelebration {
+                        LevelUpView(level: gamificationViewModel.newLevel) {
+                            gamificationViewModel.showLevelUpCelebration = false
+                        }
+                    }
+                }
         }
         .modelContainer(sharedModelContainer)
+        .environment(gamificationViewModel)
+    }
+
+    private func initializeData() {
+        let context = sharedModelContainer.mainContext
+        gamificationViewModel.initializeProfile(context: context)
+        gamificationViewModel.initializeAchievements(context: context)
     }
 }
