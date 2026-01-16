@@ -22,7 +22,7 @@ struct ProfileView: View {
                 }
                 .padding()
             }
-            .navigationTitle("Profile")
+            .navigationTitle(String(localized: "profile.title"))
             .background(Color(.systemGroupedBackground))
         }
     }
@@ -45,7 +45,7 @@ struct ProfileView: View {
                     .offset(y: 10)
             }
 
-            Text("\(profile?.totalPoints ?? 0) Points")
+            Text("\(profile?.totalPoints ?? 0) \(String(localized: "stats.points"))")
                 .font(.title3.bold())
 
             if let profile = profile {
@@ -66,28 +66,28 @@ struct ProfileView: View {
 
     private var statsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Statistics")
+            Text(String(localized: "profile.stats"))
                 .font(.headline)
 
             HStack(spacing: 16) {
                 ProfileStatCard(
                     icon: "checkmark.circle.fill",
                     value: "\(completedTodos.count)",
-                    label: "Completed",
+                    label: String(localized: "profile.completed"),
                     color: .green
                 )
 
                 ProfileStatCard(
                     icon: "trophy.fill",
                     value: "\(unlockedAchievements.count)/\(achievements.count)",
-                    label: "Badges",
+                    label: String(localized: "profile.badges"),
                     color: .yellow
                 )
 
                 ProfileStatCard(
                     icon: "calendar",
                     value: "\(profile?.longestStreak ?? 0)",
-                    label: "Best Streak",
+                    label: String(localized: "profile.bestStreak"),
                     color: .orange
                 )
             }
@@ -96,11 +96,11 @@ struct ProfileView: View {
 
     private var recentActivitySection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Recently Completed")
+            Text(String(localized: "profile.recent"))
                 .font(.headline)
 
             if completedTodos.isEmpty {
-                Text("No completed tasks yet")
+                Text(String(localized: "profile.noCompleted"))
                     .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding()

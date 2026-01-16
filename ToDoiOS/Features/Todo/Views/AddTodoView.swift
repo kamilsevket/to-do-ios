@@ -14,17 +14,17 @@ struct AddTodoView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Task Details") {
-                    TextField("Title", text: $title)
-                    TextField("Description", text: $description, axis: .vertical)
+                Section(String(localized: "tasks.details")) {
+                    TextField(String(localized: "tasks.title.placeholder"), text: $title)
+                    TextField(String(localized: "tasks.description.placeholder"), text: $description, axis: .vertical)
                         .lineLimit(3...6)
                 }
 
-                Section("Priority") {
-                    Picker("Priority", selection: $priority) {
+                Section(String(localized: "priority.title")) {
+                    Picker(String(localized: "priority.title"), selection: $priority) {
                         ForEach(TodoItem.Priority.allCases, id: \.self) { priority in
                             HStack {
-                                Text(priority.rawValue)
+                                Text(priority.localizedName)
                                 Text("+\(priority.points) pts")
                                     .foregroundColor(.secondary)
                             }
@@ -34,21 +34,21 @@ struct AddTodoView: View {
                     .pickerStyle(.segmented)
                 }
 
-                Section("Due Date") {
-                    Toggle("Set due date", isOn: $hasDueDate)
+                Section(String(localized: "duedate.title")) {
+                    Toggle(String(localized: "duedate.set"), isOn: $hasDueDate)
                     if hasDueDate {
-                        DatePicker("Due", selection: $dueDate, displayedComponents: .date)
+                        DatePicker(String(localized: "duedate.title"), selection: $dueDate, displayedComponents: .date)
                     }
                 }
             }
-            .navigationTitle("New Task")
+            .navigationTitle(String(localized: "tasks.new"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel", action: { dismiss() })
+                    Button(String(localized: "tasks.cancel"), action: { dismiss() })
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Add", action: { saveTodo() })
+                    Button(String(localized: "tasks.add"), action: { saveTodo() })
                         .disabled(title.isEmpty)
                 }
             }

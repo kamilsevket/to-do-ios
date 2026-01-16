@@ -19,7 +19,7 @@ struct AchievementsView: View {
                 }
                 .padding()
             }
-            .navigationTitle("Achievements")
+            .navigationTitle(String(localized: "achievements.title"))
             .background(Color(.systemGroupedBackground))
         }
     }
@@ -27,9 +27,9 @@ struct AchievementsView: View {
     private func statsCard(profile: UserProfile) -> some View {
         VStack(spacing: 16) {
             HStack(spacing: 24) {
-                StatItem(value: "\(profile.totalPoints)", label: "Points", icon: "star.fill", color: .yellow)
-                StatItem(value: "\(profile.level)", label: "Level", icon: "arrow.up.circle.fill", color: .blue)
-                StatItem(value: "\(profile.currentStreak)", label: "Streak", icon: "flame.fill", color: .orange)
+                StatItem(value: "\(profile.totalPoints)", label: String(localized: "stats.points"), icon: "star.fill", color: .yellow)
+                StatItem(value: "\(profile.level)", label: String(localized: "stats.level"), icon: "arrow.up.circle.fill", color: .blue)
+                StatItem(value: "\(profile.currentStreak)", label: String(localized: "stats.streak"), icon: "flame.fill", color: .orange)
             }
 
             VStack(alignment: .leading, spacing: 8) {
@@ -53,7 +53,7 @@ struct AchievementsView: View {
 
     private var achievementsList: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Badges")
+            Text(String(localized: "achievements.badges"))
                 .font(.headline)
 
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
