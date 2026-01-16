@@ -46,7 +46,7 @@ struct ConfettiModifier: ViewModifier {
                 Circle()
                     .fill(particle.color)
                     .frame(width: 8, height: 8)
-                    .offset(x: particle.x, y: particle.y)
+                    .offset(x: particle.xPosition, y: particle.yPosition)
                     .opacity(particle.opacity)
             }
         }
@@ -58,21 +58,22 @@ struct ConfettiModifier: ViewModifier {
     }
 
     private func generateConfetti() {
+        let colors: [Color] = [.red, .blue, .green, .yellow, .purple]
         particles = (0..<30).map { _ in
             ConfettiParticle(
-                x: CGFloat.random(in: -100...100),
-                y: CGFloat.random(in: -200...0),
-                color: [.red, .blue, .green, .yellow, .purple].randomElement()!,
+                xPosition: CGFloat.random(in: -100...100),
+                yPosition: CGFloat.random(in: -200...0),
+                color: colors.randomElement() ?? .blue,
                 opacity: 1
             )
         }
 
         withAnimation(.easeOut(duration: 2)) {
             particles = particles.map { particle in
-                var p = particle
-                p.y += 400
-                p.opacity = 0
-                return p
+                var updated = particle
+                updated.yPosition += 400
+                updated.opacity = 0
+                return updated
             }
         }
     }
@@ -80,8 +81,8 @@ struct ConfettiModifier: ViewModifier {
 
 struct ConfettiParticle: Identifiable {
     let id = UUID()
-    var x: CGFloat
-    var y: CGFloat
+    var xPosition: CGFloat
+    var yPosition: CGFloat
     var color: Color
     var opacity: Double
 }
