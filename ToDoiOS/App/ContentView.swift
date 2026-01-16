@@ -1,6 +1,11 @@
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Query private var profiles: [UserProfile]
+    @Environment(GamificationViewModel.self) private var gamificationViewModel
+
     var body: some View {
         TabView {
             TodoListView()
@@ -18,9 +23,12 @@ struct ContentView: View {
                     Label(String(localized: "tab.profile"), systemImage: "person.fill")
                 }
         }
+        .tint(.blue)
     }
 }
 
 #Preview {
     ContentView()
+        .modelContainer(for: [TodoItem.self, UserProfile.self, Achievement.self], inMemory: true)
+        .environment(GamificationViewModel())
 }
