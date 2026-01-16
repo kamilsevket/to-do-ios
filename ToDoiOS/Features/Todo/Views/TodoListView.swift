@@ -19,10 +19,13 @@ struct TodoListView: View {
             .navigationTitle("My Tasks")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: { showingAddSheet = true }) {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.title2)
-                    }
+                    Button(
+                        action: { showingAddSheet = true },
+                        label: {
+                            Image(systemName: "plus.circle.fill")
+                                .font(.title2)
+                        }
+                    )
                 }
             }
             .sheet(isPresented: $showingAddSheet) {

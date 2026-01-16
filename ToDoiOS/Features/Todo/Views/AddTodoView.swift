@@ -45,10 +45,10 @@ struct AddTodoView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
+                    Button("Cancel", action: { dismiss() })
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Add") { saveTodo() }
+                    Button("Add", action: { saveTodo() })
                         .disabled(title.isEmpty)
                 }
             }
