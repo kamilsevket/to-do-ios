@@ -6,11 +6,14 @@ struct TodoRowView: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            Button(action: onComplete) {
-                Image(systemName: todo.isCompleted ? "checkmark.circle.fill" : "circle")
-                    .font(.title2)
-                    .foregroundColor(todo.isCompleted ? .green : .secondary)
-            }
+            Button(
+                action: onComplete,
+                label: {
+                    Image(systemName: todo.isCompleted ? "checkmark.circle.fill" : "circle")
+                        .font(.title2)
+                        .foregroundColor(todo.isCompleted ? .green : .secondary)
+                }
+            )
             .buttonStyle(.plain)
 
             VStack(alignment: .leading, spacing: 4) {
