@@ -46,9 +46,12 @@ struct TodoListView: View {
     private var todoListContent: some View {
         List {
             ForEach(todos) { todo in
-                TodoRowView(todo: todo) {
-                    viewModel.completeTodo(todo, context: modelContext)
-                }
+                TodoRowView(
+                    todo: todo,
+                    onComplete: {
+                        viewModel.completeTodo(todo, context: modelContext)
+                    }
+                )
             }
             .onDelete(perform: deleteTodos)
         }
