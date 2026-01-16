@@ -2,39 +2,59 @@ import Foundation
 import SwiftData
 
 @Model
-final class TodoItem {
+class TodoItem {
     var id: UUID
     var title: String
     var itemDescription: String
     var isCompleted: Bool
-    var createdAt: Date
-    var completedAt: Date?
     var priority: Priority
-    var points: Int
+    var dueDate: Date?
+    var completedAt: Date?
+    var createdAt: Date
+    var pointsAwarded: Int
 
-    enum Priority: Int, Codable {
-        case low = 0
-        case medium = 1
-        case high = 2
+    enum Priority: String, Codable, CaseIterable {
+        case low = "Low"
+        case medium = "Medium"
+        case high = "High"
+
+        var points: Int {
+            switch self {
+            case .low: return 10
+            case .medium: return 25
+            case .high: return 50
+            }
+        }
+
+        var color: String {
+            switch self {
+            case .low: return "PriorityLow"
+            case .medium: return "PriorityMedium"
+            case .high: return "PriorityHigh"
+            }
+        }
     }
 
     init(
-        id: UUID = UUID(),
         title: String,
         itemDescription: String = "",
-        isCompleted: Bool = false,
-        createdAt: Date = Date(),
-        completedAt: Date? = nil,
         priority: Priority = .medium,
-        points: Int = 10
+        dueDate: Date? = nil
     ) {
-        self.id = id
+        self.id = UUID()
         self.title = title
         self.itemDescription = itemDescription
-        self.isCompleted = isCompleted
-        self.createdAt = createdAt
-        self.completedAt = completedAt
+        self.isCompleted = false
         self.priority = priority
-        self.points = points
+        self.dueDate = dueDate
+        self.completedAt = nil
+        self.createdAt = Date()
+        self.pointsAwarded = 0
+    }
+
+    func complete() {
+        isCompleted = true
+        completedAt = Date()
+        pointsAwarded = priority.points
     }
 }
